@@ -3,35 +3,14 @@ session_start();
 include "../config.php";
 
 if (isset($_POST['submit'])) {
-    if(isset($_POST['name'])) {
-        $name = $_POST['name'];
-        echo "Name: " . $name . "<br>";
-    }
-    $phone_number=$_SESSION['phone_number'];
-    if(isset($_POST['street'])) {
-        $street = $_POST['street'];
-        echo "Street: " . $street . "<br>";
-    }
-    if(isset($_POST['house'])) {
-        $house = $_POST['house'];
-        echo "House: " . $house . "<br>";
-    }
-    if(isset($_POST['entrance'])) {
-        $entrance = $_POST['entrance'];
-        echo "Entrance: " . $entrance . "<br>";
-    }
-    if(isset($_POST['floor'])) {
-        $floor = $_POST['floor'];
-        echo "Floor: " . $floor . "<br>";
-    }
-    if(isset($_POST['apartment'])) {
-        $apartment = $_POST['apartment'];
-        echo "Apartment: " . $apartment . "<br>";
-    }
-    if(isset($_POST['comment'])) {
-        $comment = $_POST['comment'];
-        echo "Comment: " . $comment . "<br>";
-    }
+    $name = $_POST['name'];
+    $phone_number = $_SESSION['phone_number'];
+    $street = $_POST['street'];
+    $house = $_POST['house'];
+    $entrance = $_POST['entrance'];
+    $floor = $_POST['floor'];
+    $apartment = $_POST['apartment'];
+    $comment = $_POST['comment'];
 
     $find_user_query = "SELECT id FROM users WHERE phone_number='$phone_number'";
     $user_result = mysqli_query($con, $find_user_query);
@@ -47,12 +26,18 @@ if (isset($_POST['submit'])) {
     $address_id = mysqli_insert_id($con);
     echo "Address ID: ".$address_id."<br>";
 
-    $cart_items = $_SESSION['cart'];
-    $max_order_id_query = "SELECT MAX(order_id) + 1 AS next_order_id FROM new_delivery.orders";
-    $max_order_id_result = mysqli_query($con, $max_order_id_query);
+$cart_items = $_SESSION['cart'];
+$max_order_id_query = "SELECT COALESCE(MAX(order_id), 0) + 1 AS next_order_id FROM orders";
+$max_order_id_result = mysqli_query($con, $max_order_id_query);
+
+if ($max_order_id_result) {
     $max_order_id_row = mysqli_fetch_assoc($max_order_id_result);
     $next_order_id = $max_order_id_row['next_order_id'];
-    $_SESSION['order_id']=$next_order_id;
+    $_SESSION['order_id'] = $next_order_id;
+} else {
+    echo "Ошибка при выполнении запроса: " . mysqli_error($con);
+}
+
 
     foreach ($cart_items as $item) {
         echo $item['dish_id'];
@@ -61,14 +46,19 @@ if (isset($_POST['submit'])) {
         $quantity = $item['quantity'];
         echo ' '.$quantity."<br>";
         $dish_id=$item['dish_id'];
+        $dish_price=$item['price'];
         
-        $insert_order_query = "INSERT INTO new_delivery.orders (order_id, dish_id, dish_name, `count`, user_id, address_id) 
+        $insert_order_query = "INSERT INTO orders (order_id, dish_id, dish_name, `count`, user_id, address_id) 
                                VALUES ('$next_order_id', '$dish_id', '$dish_name', '$quantity', '$user_id', '$address_id')";
         mysqli_query($con, $insert_order_query);
-        $order_id = mysqli_insert_id($con);
         $insert_status_query = "INSERT INTO orders_status (order_id, status) 
-                            VALUES ('$order_id', 'готовится')";
+                            VALUES ('$next_order_id', 'готовится')";
         mysqli_query($con, $insert_status_query);
+
+        $total_price = $quantity * $dish_price;
+        $insert_order_check_query = "INSERT INTO order_check (order_id, user_id, dish_id, `count`, address_id, price) 
+                                     VALUES ('$next_order_id', '$user_id', '$dish_id', '$quantity', '$address_id', '$total_price')";
+        mysqli_query($con, $insert_order_check_query);
     }
     unset($_SESSION['cart']);
     header("Location: order_success.php");

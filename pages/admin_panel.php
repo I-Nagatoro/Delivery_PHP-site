@@ -14,7 +14,7 @@ include "../config.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
-    <link href="../css/style_index.css" rel="stylesheet" type="text/css" />
+    <link href="../css/style_admin.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -83,7 +83,7 @@ include "../config.php";
                     ?>
                 </select><br><br>
 
-                <input type="submit" value="Удалить блюдо из меню">
+                <input type="submit" name="delete_dish" value="Удалить блюдо из меню">
             </form>
         <h2>Обновить блюдо в меню</h2>
 <form action="update_dish.php" method="POST">

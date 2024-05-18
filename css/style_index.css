@@ -309,12 +309,6 @@
             background-color: #cc0000;
         }
 
-
-
-
-
-
-
         .radio {
             display: flex;
             flex-direction: column;
@@ -464,3 +458,47 @@
             background-color: #f0f0f0;
             color: #fff;
           }
+          .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container h1, .container h2 {
+            text-align: center;
+        }
+        
+        .container form {
+            text-align: left;
+        }
+        
+        .container input[type="text"],
+        .container input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        
+        .container input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 15px 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .container input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .register-link:hover {
+            color: #45a049;
+        }   

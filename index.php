@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link href="css/style_index.css" rel="stylesheet" type="text/css" />
-    <title>Куриная доставка еды - Вход</title>
+    <title>Доставка еды - Вход</title>
 </head>
 <body>
-
-<h1>Куриная доставка еды</h1>
+<div class="container">
+<h1>Доставка еды</h1>
 <h2>Вход</h2>
 <form id='login' action="index.php" method='POST'>
 <strong><abcv style="font-size:14px; display: inline-block;">Введите номер телефона:</abcv><br>
@@ -19,7 +19,9 @@
     <input name="enter_login" type="submit" value='Войти'><br>
     <div>
         <h4 style="font-size: 12px; display: inline-block;">Ещё нет аккаунта?</h4>
-        <input name="go_reg" type="submit" value='Зарегистрироваться' style="display: inline-block;">
+        
+        <a href="pages/registration.php" class="register-link">Зарегистрироваться</a>
+
     </div>
 </form>
 
@@ -55,6 +57,6 @@ if(isset($_POST['go_reg'])){
 
 mysqli_close($con);
 ?>
-
+</div>
 </body>
 </html>

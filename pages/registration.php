@@ -5,11 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link href="../css/style_index.css" rel="stylesheet" type="text/css" />
-    <title>Куриная доставка еды - Регистрация</title>
+    <title>Доставка еды - Регистрация</title>
 </head>
-<body>
-
-<h1>Куриная доставка еды</h1>
+<div class="container">
+<h1>Доставка еды</h1>
 <h2>Регистрация</h2>
 <?php include 'code_check_number.php'; ?>
 
@@ -25,12 +24,10 @@
 </form>
 <div>
     <h4 style="font-size:12px; display: inline-block;">Уже есть аккаунт?</h4>
-    <form action="../index.php" method="GET" style="display: inline-block;">
-        <input type="submit" value='Войти'>
-    </form>
+    <a href="../index.php" class="register-link">Войти</a>
 </div>
 
-<?php
+<div><?php
 include '../config.php';
 include 'code_check_number.php';
 
@@ -66,6 +63,6 @@ if(isset($_POST['go_log'])){
 
 mysqli_close($con);
 ?>
-
+</div>
 </body>
 </html>
