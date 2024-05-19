@@ -6,7 +6,7 @@ include "../config.php"; ?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Chicken</title>
+    <title>Меню</title>
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link href="../css/style_index.css" rel="stylesheet" type="text/css" />
 </head>
