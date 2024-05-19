@@ -18,7 +18,7 @@ include "../config.php"; ?>
     <form style="display: inline-block;" action="logout.php" method="POST">
         <input style="text-align:left" class="logout-button" name="exit" type="submit" value='Выйти из аккаунта'>
     </form><br>
-    <?php if ($_SESSION['user_name'] == 'admin'): ?>
+    <?php if ($_SESSION['phone_number'] == 'admin'): ?>
         <a href="admin_panel.php" class="admin-button">Панель администратора</a>
     <?php endif; ?>
     </div><br><br>
@@ -44,7 +44,7 @@ include "../config.php"; ?>
             <div class="cart-item">Корзина пуста</div>
         <?php endif; ?>
     </div>
-    <form id="checkout-form" action="save_to_session.php" method="POST">
+    <form id="checkout-form" action="oformlenie.php" method="POST">
         <button type="submit" id="check" class="checkout-button">Перейти к оформлению</button>
     </form>
 </div>

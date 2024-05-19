@@ -8,12 +8,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "DELETE FROM dishes WHERE id = $dish_id";
     if ($con->query($sql) === TRUE) {
         $con->query("SET FOREIGN_KEY_CHECKS = 1");
-
         header("Location: admin_panel.php");
         exit();
     } else {
         $con->query("SET FOREIGN_KEY_CHECKS = 1");
-
         header("Location: admin_panel.php");
         exit();
     }
